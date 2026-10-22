@@ -1,0 +1,196 @@
+{
+  "effects": [
+    {
+      "id": "dent",
+      "name": "Dent",
+      "results": [
+        {
+          "id": "kinesys",
+          "name": "KINESYS (Ours)",
+          "image": "static/images/comparison/dent-kinesys.webp",
+          "alt": "Dent example: KINESYS (Ours)."
+        },
+        {
+          "id": "nano-banana-2",
+          "name": "Nano Banana 2",
+          "image": "static/images/comparison/dent-nano-banana-2.webp",
+          "alt": "Dent example: Nano Banana 2."
+        },
+        {
+          "id": "step1x-edit",
+          "name": "Step1X-Edit",
+          "image": "static/images/comparison/dent-step1x-edit.webp",
+          "alt": "Dent example: Step1X-Edit."
+        }
+      ],
+      "reference": {
+        "image": "static/images/comparison/dent-reference.webp",
+        "alt": "Dent example: Effect reference."
+      },
+      "source": {
+        "image": "static/images/comparison/dent-source.webp",
+        "alt": "Dent example: Source image."
+      }
+    },
+    {
+      "id": "explosion",
+      "name": "Explosion",
+      "results": [
+        {
+          "id": "kinesys",
+          "name": "KINESYS (Ours)",
+          "image": "static/images/comparison/explosion-kinesys.webp",
+          "alt": "Explosion example: KINESYS (Ours)."
+        },
+        {
+          "id": "nano-banana-2",
+          "name": "Nano Banana 2",
+          "image": "static/images/comparison/explosion-nano-banana-2.webp",
+          "alt": "Explosion example: Nano Banana 2."
+        },
+        {
+          "id": "step1x-edit",
+          "name": "Step1X-Edit",
+          "image": "static/images/comparison/explosion-step1x-edit.webp",
+          "alt": "Explosion example: Step1X-Edit."
+        }
+      ],
+      "reference": {
+        "image": "static/images/comparison/explosion-reference.webp",
+        "alt": "Explosion example: Effect reference."
+      },
+      "source": {
+        "image": "static/images/comparison/explosion-source.webp",
+        "alt": "Explosion example: Source image."
+      }
+    },
+    {
+      "id": "fire",
+      "name": "Fire",
+      "results": [
+        {
+          "id": "kinesys",
+          "name": "KINESYS (Ours)",
+          "image": "static/images/comparison/fire-kinesys.webp",
+          "alt": "Fire example: KINESYS (Ours)."
+        },
+        {
+          "id": "nano-banana-2",
+          "name": "Nano Banana 2",
+          "image": "static/images/comparison/fire-nano-banana-2.webp",
+          "alt": "Fire example: Nano Banana 2."
+        },
+        {
+          "id": "step1x-edit",
+          "name": "Step1X-Edit",
+          "image": "static/images/comparison/fire-step1x-edit.webp",
+          "alt": "Fire example: Step1X-Edit."
+        }
+      ],
+      "reference": {
+        "image": "static/images/comparison/fire-reference.webp",
+        "alt": "Fire example: Effect reference."
+      },
+      "source": {
+        "image": "static/images/comparison/fire-source.webp",
+        "alt": "Fire example: Source image."
+      }
+    },
+    {
+      "id": "puddle",
+      "name": "Puddle",
+      "results": [
+        {
+          "id": "kinesys",
+          "name": "KINESYS (Ours)",
+          "image": "static/images/comparison/puddle-kinesys.webp",
+          "alt": "Puddle example: KINESYS (Ours)."
+        },
+        {
+          "id": "nano-banana-2",
+          "name": "Nano Banana 2",
+          "image": "static/images/comparison/puddle-nano-banana-2.webp",
+          "alt": "Puddle example: Nano Banana 2."
+        },
+        {
+          "id": "step1x-edit",
+          "name": "Step1X-Edit",
+          "image": "static/images/comparison/puddle-step1x-edit.webp",
+          "alt": "Puddle example: Step1X-Edit."
+        }
+      ],
+      "reference": {
+        "image": "static/images/comparison/puddle-reference.webp",
+        "alt": "Puddle example: Effect reference."
+      },
+      "source": {
+        "image": "static/images/comparison/puddle-source.webp",
+        "alt": "Puddle example: Source image."
+      }
+    },
+    {
+      "id": "shadow",
+      "name": "Shadow",
+      "results": [
+        {
+          "id": "kinesys",
+          "name": "KINESYS (Ours)",
+          "image": "static/images/comparison/shadow-kinesys.webp",
+          "alt": "Shadow example: KINESYS (Ours)."
+        },
+        {
+          "id": "nano-banana-2",
+          "name": "Nano Banana 2",
+          "image": "static/images/comparison/shadow-nano-banana-2.webp",
+          "alt": "Shadow example: Nano Banana 2."
+        },
+        {
+          "id": "step1x-edit",
+          "name": "Step1X-Edit",
+          "image": "static/images/comparison/shadow-step1x-edit.webp",
+          "alt": "Shadow example: Step1X-Edit."
+        }
+      ],
+      "reference": {
+        "image": "static/images/comparison/shadow-reference.webp",
+        "alt": "Shadow example: Effect reference."
+      },
+      "source": {
+        "image": "static/images/comparison/shadow-source.webp",
+        "alt": "Shadow example: Source image."
+      }
+    },
+    {
+      "id": "snow",
+      "name": "Snow",
+      "results": [
+        {
+          "id": "kinesys",
+          "name": "KINESYS (Ours)",
+          "image": "static/images/comparison/snow-kinesys.webp",
+          "alt": "Snow example: KINESYS (Ours)."
+        },
+        {
+          "id": "nano-banana-2",
+          "name": "Nano Banana 2",
+          "image": "static/images/comparison/snow-nano-banana-2.webp",
+          "alt": "Snow example: Nano Banana 2."
+        },
+        {
+          "id": "step1x-edit",
+          "name": "Step1X-Edit",
+          "image": "static/images/comparison/snow-step1x-edit.webp",
+          "alt": "Snow example: Step1X-Edit."
+        }
+      ],
+      "reference": {
+        "image": "static/images/comparison/snow-reference.webp",
+        "alt": "Snow example: Effect reference."
+      },
+      "source": {
+        "image": "static/images/comparison/snow-source.webp",
+        "alt": "Snow example: Source image."
+      }
+    }
+  ]
+}

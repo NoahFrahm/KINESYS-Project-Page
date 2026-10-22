@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KINESYS adapts an image editor at test time to transfer reference-based visual effects while preserving the source subject, composition, and scene.">
+  <meta name="author" content="Noah Frahm, Luchao Qi, Haoze Li, Dan B Goldman, Sambit Bhattacharya, Roni Sengupta">
+  <meta name="keywords" content="KINESYS, reference-based image editing, visual effects, test-time adaptation, identity preservation">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KINESYS: Test-Time Adaptation for Reference-Based Effect Editing in Images">
+  <meta property="og:description" content="Transfer the effect. Preserve the scene. Reference-based visual effects editing with test-time adaptation.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="KINESYS: Reference-Based Effect Editing in Images">
+  <meta name="twitter:description" content="Transfer the effect. Preserve the scene. Reference-based visual effects editing with test-time adaptation.">
+  <meta name="citation_title" content="KINESYS: Test-Time Adaptation for Reference-Based Effect Editing in Images">
+  <meta name="citation_author" content="Frahm, Noah">
+  <meta name="citation_author" content="Qi, Luchao">
+  <meta name="citation_author" content="Li, Haoze">
+  <meta name="citation_author" content="Goldman, Dan B">
+  <meta name="citation_author" content="Bhattacharya, Sambit">
+  <meta name="citation_author" content="Sengupta, Roni">
+  <title>KINESYS: Test-Time Adaptation for Reference-Based Effect Editing in Images</title>
+  <link rel="icon" type="image/svg+xml" href="static/images/kinesys.svg">
+  <link rel="stylesheet" href="static/css/index.css?v=6864ff5bdfb3">
+  <script src="static/js/video-player.js?v=21c432fdd50b" defer></script>
+  <script src="static/js/effect-comparison.js?v=452a96190f0f" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <main id="main-content">
+    <header class="publication-header container">
+      <h1 class="publication-title"><span class="project-name">KINESYS</span><span class="paper-title">Test-Time Adaptation for<br> Reference-Based Effect Editing in Images</span></h1>
+      <p class="publication-authors">
+        <span><a href="https://noahfrahm.github.io/">Noah Frahm</a><sup>1</sup>,</span>
+        <span><a href="https://luchaoqi.com/">Luchao Qi</a><sup>1</sup>,</span>
+        <span><a href="https://fzli8.github.io/">Haoze Li</a><sup>1</sup>,</span>
+        <span><a href="https://www.danbgoldman.com/home/">Dan B Goldman</a><sup>2</sup>,</span>
+        <span><a href="https://www.uncfsu.edu/academics/colleges-schools-and-departments/lloyd-college-of-health-science-and-technology/department-of-mathematics-and-computer-science/faculty-and-staff/dr-sambit-bhattacharya">Sambit Bhattacharya</a><sup>3</sup>,</span>
+        <span><a href="https://www.cs.unc.edu/~ronisen/">Roni Sengupta</a><sup>1</sup></span>
+      </p>
+      <div class="publication-affiliations">
+        <span><sup>1</sup> <a href="https://www.unc.edu/">University of North Carolina at Chapel Hill</a></span>
+        <span><sup>2</sup> Industrial Light &amp; Magic</span>
+        <span><sup>3</sup> <a href="https://www.uncfsu.edu/">Fayetteville State University</a></span>
+      </div>
+      <div class="publication-links" aria-label="Project resources">
+        <button type="button" class="resource-button" disabled>arXiv <span>Coming soon</span></button>
+        <button type="button" class="resource-button" disabled>GitHub Code <span>Coming soon</span></button>
+      </div>
+      <h2 class="tagline">Transfer and Preserve</h2>
+      <nav class="section-nav" aria-label="Page sections">
+        <a href="#results">Results</a>
+        <a href="#method">Method</a>
+        <a href="#evaluation">Evaluation</a>
+        <a href="#user-study">User Study</a>
+        <a href="#acknowledgments">Acknowledgments</a>
+      </nav>
+    </header>
+
+    <section class="teaser container" aria-label="KINESYS overview">
+      <figure class="teaser-figure">
+        <img src="static/images/teaser-smoke.webp" width="2401" height="636" fetchpriority="high" decoding="async" alt="Colorful smoke editing: an effect reference, source racecar, mask, and editing prompt produce two results. The illustrated user prefers the first result because its smoke trail is fuller and longer.">
+      </figure>
+      <figure class="project-video" data-video-player>
+        <video id="overview-video" controls playsinline preload="auto" poster="static/images/overview-video-poster.webp" width="1920" height="1080" aria-label="KINESYS puddle and boat-wake comparisons">
+          <source src="static/videos/kinesys-overview.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="static/videos/kinesys-overview.mp4">Watch the effect comparisons</a>.
+        </video>
+        <figcaption>
+          <button type="button" class="play-hint" aria-controls="overview-video"><span aria-hidden="true">🖐️</span> Click to play video</button>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section section-muted" id="abstract">
+      <div class="container reading-width">
+        <h2>Abstract</h2>
+        <p>Visual effects are often easier to demonstrate via reference than to describe in words. We study effect-reference editing, where a reference image shows a desired visual effect and language identifies which properties should guide the edit. Existing single-pass editing techniques often fail to make fine-grained edits, resulting in subtle identity distortions or deviations from the reference effect. We introduce <strong>KINESYS</strong>, a test-time adaptation framework for effect-reference editing that combines reference-aware and source-aware feedback to transfer the desired effect while preserving the identity of the original shot. To ensure KINESYS can produce a diverse set of identity-preserving edits, we develop a robust optimization strategy in which the generative model is fine-tuned across multiple noise samples and optimization runs. Evaluation with VLM judges, source-preservation metrics (LPIPS, TPIPS), and a user study shows that KINESYS outperforms state-of-the-art image editors in source identity preservation; on effect transfer, it remains competitive with Nano Banana 2 and outperforms open-weight editors.</p>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container">
+        <div class="section-heading reading-width">
+          <h2>Effect Comparison</h2>
+        </div>
+        <div class="effect-comparison" data-effect-comparison data-effects-src="static/data/effect-comparison.json" aria-label="Effect comparison">
+          <p>Loading effect comparisons…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="container">
+        <div class="section-heading reading-width">
+          <h2>How KINESYS works</h2>
+        </div>
+        <figure class="method-figure">
+          <img src="static/images/method_up.webp" width="2401" height="1482" loading="lazy" decoding="async" alt="KINESYS method diagram: source, reference, optional mask, prompt, and questions enter a fine-tuning loop. Reference-grounded VQA and source-aware EditReward evaluate candidate edits. Independent LoRA runs are pruned before a checkpoint is selected.">
+        </figure>
+        <div class="method-walkthrough">
+          <figure class="project-video" data-video-player>
+            <video id="method-video" controls playsinline preload="metadata" poster="static/images/method-video-poster.webp" width="1920" height="1080" aria-label="KINESYS method video">
+              <source src="static/videos/kinesys-method.mp4?v=32ddfa8c353a" type="video/mp4">
+              Your browser does not support embedded video. <a href="static/videos/kinesys-method.mp4?v=32ddfa8c353a">Watch the method video</a>.
+            </video>
+            <figcaption>
+              <button type="button" class="play-hint" aria-controls="method-video"><span aria-hidden="true">🖐️</span> Click to play video</button>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="evaluation">
+      <div class="container">
+        <div class="section-heading reading-width">
+          <h2>Editing quality and source preservation</h2>
+        </div>
+        <div class="table-scroll" role="region" aria-label="Editing benchmark comparison" tabindex="0">
+          <table>
+            <caption>Comparison on 156 shared request–seed cases (81 requests). Gemini, EditScore, and EditReward assess editing quality; LPIPS and TPIPS measure source similarity. ↑ higher is better; ↓ lower is better. Bold and underline mark first and second. † EditReward was used for tuning and selection and is not an independent evaluation. ‡ Generator–judge family overlap. Scores are shown to three decimal places.</caption>
+            <thead>
+              <tr><th rowspan="2" scope="col">Method</th><th colspan="3" scope="colgroup">Automated judges</th><th colspan="2" scope="colgroup">Identity preservation</th></tr>
+              <tr><th scope="col">Gemini ↑</th><th scope="col">EditScore ↑</th><th scope="col">EditReward ↑</th><th scope="col">LPIPS ↓</th><th scope="col">TPIPS ↑</th></tr>
+            </thead>
+            <tbody>
+              <tr class="group-row"><th colspan="6" scope="rowgroup">Open-weight methods</th></tr>
+              <tr><th scope="row">OmniGen2</th><td>4.950</td><td>7.530</td><td>−0.018</td><td>0.753</td><td>0.599</td></tr>
+              <tr><th scope="row">ACE++</th><td>4.980</td><td>5.950</td><td>−0.503</td><td>0.795</td><td>0.500</td></tr>
+              <tr><th scope="row">ICEdit</th><td>5.930</td><td>6.910</td><td>−0.097</td><td><span class="runner-up">0.429</span></td><td>0.632</td></tr>
+              <tr><th scope="row">Dual-Process</th><td>7.090</td><td>7.930</td><td>0.212</td><td>0.577</td><td>0.615</td></tr>
+              <tr><th scope="row">Qwen-Image-Edit</th><td>7.670</td><td>8.310</td><td>0.435</td><td>0.645</td><td>0.599</td></tr>
+              <tr><th scope="row">FLUX.2 Klein 4B</th><td>7.900</td><td>8.680</td><td>0.501</td><td>0.579</td><td>0.640</td></tr>
+              <tr><th scope="row">Step1X-Edit</th><td>8.220</td><td>8.800</td><td>0.666</td><td>0.449</td><td><span class="runner-up">0.724</span></td></tr>
+            </tbody>
+            <tbody>
+              <tr class="group-row"><th colspan="6" scope="rowgroup">Proprietary methods</th></tr>
+              <tr><th scope="row">Nano Banana 2</th><td><strong>8.910</strong><sup>‡</sup></td><td><strong>9.060</strong></td><td><span class="runner-up">0.738</span></td><td><span class="runner-up">0.429</span></td><td>0.696</td></tr>
+            </tbody>
+            <tbody>
+              <tr class="ours-row"><th scope="row">KINESYS (Ours)</th><td><span class="runner-up">8.830</span></td><td><span class="runner-up">8.950</span></td><td><strong>1.007</strong><sup>†</sup></td><td><strong>0.377</strong></td><td><strong>0.731</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section user-study" id="user-study" aria-labelledby="user-study-title">
+      <div class="container">
+        <div class="section-heading reading-width">
+          <p class="study-eyebrow">Blind human evaluation</p>
+          <h2 id="user-study-title">User study</h2>
+        </div>
+        <figure class="study-chart" aria-labelledby="user-study-title" aria-describedby="study-protocol">
+          <div class="study-panels">
+            <div class="study-panel">
+              <div class="study-panel-heading">
+                <h3>vs. Nano Banana 2</h3>
+              </div>
+              <div class="study-metric">
+                <h4>Identity preservation</h4>
+                <div class="study-bar" aria-hidden="true">
+                  <span class="study-win" style="--share: 45.3"></span>
+                  <span class="study-tie" style="--share: 30.0"></span>
+                  <span class="study-baseline" style="--share: 24.7"></span>
+                </div>
+                <dl class="study-values">
+                  <div class="study-win-value"><dt>KINESYS</dt><dd>45.3%</dd></div>
+                  <div><dt>Tie / unclear</dt><dd>30.0%</dd></div>
+                  <div class="study-baseline-value"><dt>Baseline</dt><dd>24.7%</dd></div>
+                </dl>
+              </div>
+              <div class="study-metric">
+                <h4>Effect transfer</h4>
+                <div class="study-bar" aria-hidden="true">
+                  <span class="study-win" style="--share: 48.2"></span>
+                  <span class="study-tie" style="--share: 9.8"></span>
+                  <span class="study-baseline" style="--share: 42.1"></span>
+                </div>
+                <dl class="study-values">
+                  <div class="study-win-value"><dt>KINESYS</dt><dd>48.2%</dd></div>
+                  <div><dt>Tie / unclear</dt><dd>9.8%</dd></div>
+                  <div class="study-baseline-value"><dt>Baseline</dt><dd>42.1%</dd></div>
+                </dl>
+              </div>
+            </div>
+            <div class="study-panel">
+              <div class="study-panel-heading">
+                <h3>vs. Step1X-Edit v1.2</h3>
+              </div>
+              <div class="study-metric">
+                <h4>Identity preservation</h4>
+                <div class="study-bar" aria-hidden="true">
+                  <span class="study-win" style="--share: 53.6"></span>
+                  <span class="study-tie" style="--share: 25.5"></span>
+                  <span class="study-baseline" style="--share: 20.9"></span>
+                </div>
+                <dl class="study-values">
+                  <div class="study-win-value"><dt>KINESYS</dt><dd>53.6%</dd></div>
+                  <div><dt>Tie / unclear</dt><dd>25.5%</dd></div>
+                  <div class="study-baseline-value"><dt>Baseline</dt><dd>20.9%</dd></div>
+                </dl>
+              </div>
+              <div class="study-metric">
+                <h4>Effect transfer</h4>
+                <div class="study-bar" aria-hidden="true">
+                  <span class="study-win" style="--share: 69.8"></span>
+                  <span class="study-tie" style="--share: 8.1"></span>
+                  <span class="study-baseline" style="--share: 22.0"></span>
+                </div>
+                <dl class="study-values">
+                  <div class="study-win-value"><dt>KINESYS</dt><dd>69.8%</dd></div>
+                  <div><dt>Tie / unclear</dt><dd>8.1%</dd></div>
+                  <div class="study-baseline-value"><dt>Baseline</dt><dd>22.0%</dd></div>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <figcaption class="study-protocol" id="study-protocol">Blind paired comparisons evaluated identity preservation and reference-effect transfer separately across 16 source–reference cases, two from each of eight effect families. Participants saw anonymous A/B results in synchronized source-to-edit videos, with method positions counterbalanced and item order shuffled; most respondents were not VFX experts. Bars show preferences, including “Hard to tell / No clear winner.” Percentages are reproduced from the paper to one decimal place and may not sum to 100% due to rounding.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="acknowledgments" aria-labelledby="acknowledgments-title">
+      <div class="container reading-width">
+        <div class="section-heading">
+          <h2 id="acknowledgments-title">Acknowledgments</h2>
+        </div>
+        <p>This work was partly supported by NCInnovation under the project “KINESYS+ATLAS: AI and Synthetic Data for Critical Applications”.</p>
+      </div>
+    </section>
+
+  </main>
+  <footer class="footer">
+    <div class="container reading-width">
+      <p>Built on the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a>, originally adapted from <a href="https://nerfies.github.io/">Nerfies</a>.</p>
+      <p>Website template licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>
